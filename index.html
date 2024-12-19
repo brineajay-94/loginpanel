@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column; /* Allows footer to sit at the bottom */
+        }
+
+        /* Container for the login form */
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 380px;
+            transition: all 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px); /* Small hover effect */
+        }
+
+        /* Header for the form */
+        .login-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        /* Input fields */
+        .input-field {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 8px rgba(37, 117, 252, 0.5);
+        }
+
+        /* Submit button */
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            box-sizing: border-box;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #1d64c1;
+            transform: translateY(-2px);
+        }
+
+        /* Forgot password link */
+        .forgot-password {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .forgot-password a {
+            color: #2575fc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Error message */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Show Password Section */
+        .show-password {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .show-password input {
+            margin-right: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 20px;
+            }
+
+            .login-container h2 {
+                font-size: 22px;
+            }
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #fff;
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+
+    <!-- Login Form -->
+    <form id="login-form">
+        <input type="text" id="username" class="input-field" placeholder="Username" required>
+        <input type="password" id="password" class="input-field" placeholder="Password" required>
+
+        <!-- Show Password checkbox -->
+        <div class="show-password">
+            <input type="checkbox" id="show-password">
+            <label for="show-password">Show Password</label>
+        </div>
+
+        <!-- Error message -->
+        <div id="error-message" class="error-message"></div>
+
+        <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <!-- Forgot password link -->
+    <div class="forgot-password">
+        <a href="#">Forgot your password?</a>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<div class="footer">
+    Powered by <a href="#">BrineAjay</a>
+</div>
+
+<script>
+    // Define valid users in an object
+    const validUsers = {
+        'BrineAjay': '@ajay@12',
+        'Danzi': '@danzi',
+        'User1': 'Password1',
+        'User2': 'Password2'
+        // Add more users here
+    };
+
+    // Handle the form submission
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();  // Prevent form submission
+        
+        // Get username and password values
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('error-message');
+
+        // Clear any previous error messages
+        errorMessage.textContent = '';
+
+        // Check if the username exists and the password matches
+        if (validUsers[username] && validUsers[username] === password) {
+            // Redirect to example.com after successful login
+            window.location.href = "https://example.com";  
+        } else {
+            errorMessage.textContent = 'Invalid username or password. Please try again.';
+        }
+    });
+
+    // Show/Hide password functionality
+    document.getElementById('show-password').addEventListener('change', function() {
+        const passwordField = document.getElementById('password');
+        if (this.checked) {
+            passwordField.type = 'text'; // Show password
+        } else {
+            passwordField.type = 'password'; // Hide password
+        }
+    });
+</script>
+
+</body>
+</html>
